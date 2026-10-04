@@ -23,7 +23,6 @@ require("lazy").setup({
   },
   install = { colorscheme = { "habamax" } },
   checker = { enabled = true },
-  library = { 'nvim-dap-ui' }
 })
 
 

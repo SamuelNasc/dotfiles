@@ -26,7 +26,7 @@ end
 function M.get_highest_net_folder(bin_debug_path)
   local dirs = vim.fn.glob(bin_debug_path .. "/net*", false, true) -- Get all folders starting with 'net' in bin_debug_path
 
-  if dirs == 0 then
+  if #dirs == 0 then
     error("No netX.Y folders found in " .. bin_debug_path)
   end
 

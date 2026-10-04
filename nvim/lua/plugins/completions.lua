@@ -1,45 +1,22 @@
 return {
   {
-    'hrsh7th/cmp-nvim-lsp',
+    'saghen/blink.cmp',
+    version = '1.*',
+    dependencies = { 'rafamadriz/friendly-snippets' },
+    opts = {
+      -- 'enter' preset: <CR> accepts, <C-Space> opens, <C-e> closes, <C-b>/<C-f> scroll docs
+      keymap = { preset = 'enter' },
+      appearance = { nerd_font_variant = 'mono' },
+      completion = {
+        menu = { border = 'rounded' },
+        documentation = { auto_show = true, window = { border = 'rounded' } },
+      },
+      signature = { enabled = true, window = { border = 'rounded' } },
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
+    },
+    opts_extend = { 'sources.default' },
   },
-  {
-    'L3MON4D3/LuaSnip',
-    dependencies = {
-      'saadparwaiz1/cmp_luasnip',
-      'rafamadriz/friendly-snippets',
-    }
-  },
-  {
-	"hrsh7th/nvim-cmp",
-	config = function()
-		local cmp = require("cmp")
-    require('luasnip.loaders.from_vscode').lazy_load()
-    
-		cmp.setup({
-			snippet = {
-				expand = function(args)
-					vim.fn["vsnip#anonymous"](args.body)
-					require('luasnip').lsp_expand(args.body)
-				end,
-			},
-			window = {
-				completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
-			},
-			mapping = cmp.mapping.preset.insert({
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<C-e>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
-			}),
-			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = 'luasnip' },
-			}, {
-				{ name = "buffer" },
-			}),
-		})
-	end,
- }
 }
